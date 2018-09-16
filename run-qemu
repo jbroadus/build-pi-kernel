@@ -1,0 +1,9 @@
+#!/bin/bash
+
+MACHINE=raspi2
+DTB=linux/arch/arm/boot/dts/bcm2709-rpi-2-b.dtb
+KERNEL=linux/arch/arm/boot/zImage
+CMDLINE="console=serial0,115200 console=tty1"
+
+set -x
+qemu-system-arm -M $MACHINE -kernel $KERNEL -dtb $DTB -append "$CMDLINE" -serial stdio
