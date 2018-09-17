@@ -1,9 +1,14 @@
 #!/bin/bash
 
+# Reference:
+# dwc_otg.lpm_enable=0 console=serial0,115200 console=tty1 root=PARTUUID=4d3ee428-02 rootfstype=ext4 elevator=deadline fsck.repair=yes rootwait quiet init=/usr/lib/raspi-config/init_resize.sh
+
 MACHINE=raspi2
 DTB=linux/arch/arm/boot/dts/bcm2709-rpi-2-b.dtb
 KERNEL=linux/arch/arm/boot/zImage
-CMDLINE="console=serial0,115200 console=tty1"
+SD=~/pi/pi.qcow2
+#CMDLINE="console=ttyAMA0,115200 console=tty1 dwc_otg.lpm_enable=0 root=/dev/mmcblk0p2 rootfstype=ext4 rootwait"
+CMDLINE="console=serial,115200 console=tty1 dwc_otg.lpm_enable=0 root=/dev/mmcblk0p2 rootfstype=ext4 rootwait"
 
 set -x
-qemu-system-arm -M $MACHINE -kernel $KERNEL -dtb $DTB -append "$CMDLINE" -serial stdio
+qemu-system-arm -M $MACHINE -kernel $KERNEL -dtb $DTB -sd $SD -append "$CMDLINE" -serial stdio
