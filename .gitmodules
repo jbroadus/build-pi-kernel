@@ -3,4 +3,4 @@
 	url = https://github.com/raspberrypi/tools
 [submodule "linux"]
 	path = linux
-	url = https://github.com/raspberrypi/linux
+	url = https://github.com/jbroadus/pi-linux.git
